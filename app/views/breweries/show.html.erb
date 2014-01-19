@@ -6,7 +6,13 @@
   <i>Established in <%= @brewery.year %></i>
 </p>
 
-<p>Beers: <%= @brewery.beers.count %> </p>
+<h3>Beers (<%= @brewery.beers.count %>):</h3>
+
+<ul>
+  <% @brewery.beers.each do |b| %>
+    <li><%= link_to b.name, b %></li>
+  <% end %>
+</ul>
 
 <%= link_to 'Edit', edit_brewery_path(@brewery) %> |
 <%= link_to 'Back', breweries_path %>
