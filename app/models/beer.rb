@@ -3,8 +3,7 @@ class Beer < ActiveRecord::Base
   has_many :ratings
 
   def average_rating
-    sum = 0;
-    ratings.each { |r| sum += r.score }
+    sum = ratings.inject(0) { |sum, r| sum + r.score }
     return sum.to_f / ratings.count
   end
 end
