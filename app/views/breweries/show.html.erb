@@ -3,7 +3,7 @@
 <h2><%= @brewery.name %></h2>
 
 <p>
-  <i>Established in <%= @brewery.year %></i>
+  <i>Established in <%= @brewery.year %>.</i>
 </p>
 
 <h3>Beers (<%= @brewery.beers.count %>):</h3>
@@ -14,5 +14,12 @@
   <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_brewery_path(@brewery) %> |
-<%= link_to 'Back', breweries_path %>
+<p>
+  <% if @brewery.ratings.empty? %>
+    No beers have been rated yet!
+  <% else %>
+    Brewery has <%= pluralize(@brewery.ratings.count, 'rating') %> with average score of <%= @brewery.average_rating.round(2) %>.
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_brewery_path(@brewery) %>
