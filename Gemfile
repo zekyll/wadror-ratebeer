@@ -53,3 +53,6 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'byebug', group: [:development, :test]
+
+# Password digest
+gem 'bcrypt-ruby', '~> 3.1.2'
