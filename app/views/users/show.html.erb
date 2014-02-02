@@ -36,7 +36,7 @@
 <% end %>
 
 <% if @user == current_user %>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Change password', edit_user_path(@user) %> |
+  <%= link_to 'Delete user account', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
 <%= link_to 'Back', users_path %>
