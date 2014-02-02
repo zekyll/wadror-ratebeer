@@ -7,7 +7,12 @@
   <%= pluralize(@user.ratings.count, 'rating') %>. Average <%= @user.average_rating.round(2) %>.
   <ul>
     <% @user.ratings.each do |r| %>
-      <li><%= r %> <%= link_to 'delete', r, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+      <li>
+        <%= r %>
+        <% if @user == current_user %>
+          <%= link_to 'delete', r, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% else %>
@@ -18,12 +23,20 @@
 <% if @user.memberships.any? %>
   <ul>
     <% @user.memberships.each do |m| %>
-      <li><%= link_to m.beer_club, m.beer_club %> <%= link_to 'delete', m, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+      <li>
+        <%= link_to m.beer_club, m.beer_club %>
+        <% if @user == current_user %>
+          <%= link_to 'delete', m, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% else %>
   <p>No club memberships.</p>
 <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<% if @user == current_user %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', users_path %>

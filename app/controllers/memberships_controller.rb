@@ -17,7 +17,7 @@ class MembershipsController < ApplicationController
 
   def destroy
     membership = Membership.find(params[:id])
-    membership.delete
+    membership.delete if membership.user == current_user
     redirect_to :back
   end
 end

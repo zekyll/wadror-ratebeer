@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return nil if session[:user_id].nil?
-    return User.find(session[:user_id])
+    user = User.find_by(id: session[:user_id]);
+    if user == nil
+      session[:user_id] = nil
+    end
+    return user
   end
 end
