@@ -10,10 +10,15 @@ class RatingsController < ApplicationController
 
   def create
     rating_params = params.require(:rating).permit(:score, :beer_id)
-    beer = Beer.find(rating_params[:beer_id]) # throws if beer id not found
-    rating = beer.ratings.create rating_params
-    current_user.ratings << rating
-    redirect_to current_user
+    @rating = Rating.new rating_params
+
+    if @rating.save
+      current_user.ratings << @rating
+      redirect_to current_user
+    else
+      @beers = Beer.all
+      render :new
+    end
   end
 
   def destroy
