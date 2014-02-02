@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   has_many :beer_clubs, through: :memberships
 
   validates :username, uniqueness: true, length: { in: 3..15 }
+
+  def unjoined_clubs
+    BeerClub.all.select { |c| not c.members.include? self }
+  end
 end

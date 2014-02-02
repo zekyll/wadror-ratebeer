@@ -13,11 +13,15 @@
     </div>
   <% end %>
 
+<% if current_user.unjoined_clubs.any? %>
   <div class="field">
     <%= f.label :beer_club_id %><br>
-    <%= f.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :name) %>
+    <%= f.select :beer_club_id, options_from_collection_for_select(current_user.unjoined_clubs, :id, :name) %>
   </div>
   <div class="actions">
     <%= f.submit 'Join' %>
   </div>
+<% else %>
+  <p>No clubs left to join.</p>
+<% end %>
 <% end %>
