@@ -20,13 +20,13 @@ class User < ActiveRecord::Base
 
   def password_must_contain_capital_letters
     if /[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/.match(password) == nil
-      errors.add(:year, "must contain at least one capital letter A-Z")
+      errors.add(:password, "must contain at least one capital letter A-Z")
     end
   end
 
   def password_must_contain_digits
     if /[0123456789]/.match(password) == nil
-      errors.add(:year, "must contain at least one digit 0-9")
+      errors.add(:password, "must contain at least one digit 0-9")
     end
   end
 end
