@@ -11,7 +11,8 @@ class RatingsController < ApplicationController
   def create
     rating_params = params.require(:rating).permit(:score, :beer_id)
     beer = Beer.find(rating_params[:beer_id]) # throws if beer id not found
-    beer.ratings.create rating_params
+    rating = beer.ratings.create rating_params
+    session[:last_rating] = "#{rating.beer.name} #{rating.score} points"
     redirect_to ratings_path
   end
 
