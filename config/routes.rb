@@ -1,5 +1,7 @@
 Ratebeer::Application.routes.draw do
 
+  resources :beer_clubs
+
   resources :users
 
   root 'breweries#index'
@@ -17,6 +19,8 @@ Ratebeer::Application.routes.draw do
   delete 'signout', to: 'sessions#destroy'
 
   resources :sessions, only: [:new, :create, :destroy]
+
+  resources :memberships, only: [:new, :create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
