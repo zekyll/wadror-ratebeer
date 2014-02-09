@@ -1,6 +1,19 @@
 require 'spec_helper'
 
 describe User do
+
+  def create_beer_with_rating(score, user, style = nil)
+    beer = style == nil ? FactoryGirl.create(:beer) : FactoryGirl.create(:beer, style:style)
+    FactoryGirl.create(:rating, score:score, beer:beer, user:user)
+    beer
+  end
+
+  def create_beers_with_ratings(*scores, user, style)
+    scores.each do |score|
+      create_beer_with_rating(score, user, style)
+    end
+  end
+
   it "has the username set correctly" do
     user = User.new username:"Pekka"
     user.username.should == "Pekka"
@@ -30,8 +43,51 @@ describe User do
     User.count.should == 0
   end
 
+  describe "favorite beer" do
+    let(:user){ FactoryGirl.create(:user) }
+
+    it "has method for determining one" do
+      user.should respond_to :favorite_beer
+    end
+
+    it "without ratings does not have one" do
+      user.favorite_beer.should == nil
+    end
+
+    it "is the only rated if only one rating" do
+      beer = create_beer_with_rating(10, user)
+      user.favorite_beer.should == beer
+    end
+
+    it "is the one with highest rating if several rated" do
+      create_beers_with_ratings(10, 20, 15, 7, 9, user, nil)
+      best = create_beer_with_rating(25, user)
+      user.favorite_beer.should == best
+    end
+  end
+
+  describe "favorite style" do
+    let(:user){ FactoryGirl.create(:user) }
+
+    it "without ratings does not have one" do
+      user.favorite_style.should == nil
+    end
+
+    it "is the only rated if only one rating" do
+      beer = create_beer_with_rating(10, user)
+      user.favorite_style.should == beer.style
+    end
+
+    it "is the one with highest rating if several rated" do
+      create_beers_with_ratings(2, 3, 4, user, "Style1")
+      create_beers_with_ratings(3, 5, user, "Style2")
+      create_beers_with_ratings(2, 1, 4, 7, user, "Style3")
+      user.favorite_style.should == "Style2"
+    end
+  end
+
   describe "with a proper password" do
-    let(:user) { User.create username: "Pekka", password: "Psw1", password_confirmation: "Psw1" }
+    let(:user) { FactoryGirl.create(:user) }
 
     it "is saved" do
       user.valid?.should == true
@@ -39,11 +95,8 @@ describe User do
     end
 
     it "and two ratings, has the correct average rating" do
-      rating = Rating.new score:10
-      rating2 = Rating.new score:20
-
-      user.ratings << rating
-      user.ratings << rating2
+      user.ratings << FactoryGirl.create(:rating)
+      user.ratings << FactoryGirl.create(:rating2)
 
       user.ratings.count.should == 2
       user.average_rating.should == 15.0
