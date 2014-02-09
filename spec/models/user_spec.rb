@@ -2,15 +2,16 @@ require 'spec_helper'
 
 describe User do
 
-  def create_beer_with_rating(score, user, style = nil)
-    beer = style == nil ? FactoryGirl.create(:beer) : FactoryGirl.create(:beer, style:style)
+  def create_beer_with_rating(score, user, attr = nil)
+
+    beer = attr == nil ? FactoryGirl.create(:beer) : FactoryGirl.create(:beer, attr)
     FactoryGirl.create(:rating, score:score, beer:beer, user:user)
     beer
   end
 
-  def create_beers_with_ratings(*scores, user, style)
+  def create_beers_with_ratings(*scores, user, attr)
     scores.each do |score|
-      create_beer_with_rating(score, user, style)
+      create_beer_with_rating(score, user, attr)
     end
   end
 
@@ -79,10 +80,33 @@ describe User do
     end
 
     it "is the one with highest rating if several rated" do
-      create_beers_with_ratings(2, 3, 4, user, "Style1")
-      create_beers_with_ratings(3, 5, user, "Style2")
-      create_beers_with_ratings(2, 1, 4, 7, user, "Style3")
+      create_beers_with_ratings(2, 3, 4, user, style: "Style1")
+      create_beers_with_ratings(3, 5, user, style: "Style2")
+      create_beers_with_ratings(2, 1, 4, 7, user, style: "Style3")
       user.favorite_style.should == "Style2"
+    end
+  end
+
+  describe "favorite brewery" do
+    let(:user){ FactoryGirl.create(:user) }
+
+    it "without ratings does not have one" do
+      user.favorite_style.should == nil
+    end
+
+    it "is the only rated if only one rating" do
+      beer = create_beer_with_rating(10, user)
+      user.favorite_style.should == beer.style
+    end
+
+    it "is the one with highest rating if several rated" do
+      br1 = FactoryGirl.create(:brewery, name:"Br1")
+      br2 = FactoryGirl.create(:brewery, name:"Br2")
+      br3 = FactoryGirl.create(:brewery, name:"Br3")
+      create_beers_with_ratings(2, 3, 4, user, brewery: br1)
+      create_beers_with_ratings(3, 5, user, brewery: br2)
+      create_beers_with_ratings(2, 1, 4, 7, user, brewery: br3)
+      user.favorite_brewery.should == br2
     end
   end
 

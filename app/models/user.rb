@@ -32,6 +32,19 @@ class User < ActiveRecord::Base
     styles.sort_by{ |k, v| v.sum.to_f / v.count }.last[0]
   end
 
+  def favorite_brewery
+    return nil if ratings.empty?
+    breweries = {}
+    ratings.each do |r|
+      if not breweries.key? r.beer.brewery
+        breweries[r.beer.brewery] = Struct.new(:count, :sum).new(0, 0)
+      end
+      breweries[r.beer.brewery].count += 1
+      breweries[r.beer.brewery].sum += r.score
+    end
+    breweries.sort_by{ |k, v| v.sum.to_f / v.count }.last[0]
+  end
+
   def unjoined_clubs
     BeerClub.all.select { |c| not c.members.include? self }
   end
