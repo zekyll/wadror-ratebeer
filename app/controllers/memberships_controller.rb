@@ -1,5 +1,8 @@
 class MembershipsController < ApplicationController
   def new
+    if current_user.nil?
+      redirect_to signin_path, notice:'Joining a club requires sign-in.'
+    end
     @membership = Membership.new
   end
 

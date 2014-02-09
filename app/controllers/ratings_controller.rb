@@ -12,7 +12,9 @@ class RatingsController < ApplicationController
     rating_params = params.require(:rating).permit(:score, :beer_id)
     @rating = Rating.new rating_params
 
-    if @rating.save
+    if current_user.nil?
+      redirect_to signin_path, notice:'Rating a beer requires sign-in.'
+    elsif @rating.save
       current_user.ratings << @rating
       redirect_to current_user
     else
