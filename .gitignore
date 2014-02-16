@@ -17,3 +17,6 @@
 
 # Ignore project files
 /.idea
+
+# Ignore simplecov output
+/coverage

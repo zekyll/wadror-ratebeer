@@ -62,4 +62,5 @@ group :test do
   gem 'factory_girl_rails', '~> 4.3.0'
   gem 'capybara'
   gem 'launchy'
+  gem 'simplecov', require: false
 end
