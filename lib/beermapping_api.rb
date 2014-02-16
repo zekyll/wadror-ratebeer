@@ -22,6 +22,6 @@ class BeermappingApi
   end
 
   def self.key
-    "..."
+    Settings.beermapping_apikey
   end
 end
