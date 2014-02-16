@@ -1,10 +1,16 @@
 language: ruby
-
 rvm:
- - 2.0.0
-
+- 2.0.0
 script:
- - bundle exec rake db:migrate --trace
- - RAILS_ENV=test bundle exec rake db:migrate --trace
- - bundle exec rake db:test:prepare
- - bundle exec rspec -fd spec/
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: OUNwJUsqEQLToyfin0CZzMxCMbBGazEVyjU7UryqHOM1TAIpj2GChjkqQrFRpdMKIoajsIWF4yC+Wd9Sk6xpuUuHUb9IQnb1F3hCZ8iitvDQ1eqfQvh/oXom7JVZw/zTcaBzmXs90y1vysjEwuomzTbsn2Ia8Tm4OuW1LeyQUTQ=
+  app: fierce-citadel-3139
+  on:
+    repo: zekyll/wadror-ratebeer
+  run: "rake db:migrate"
