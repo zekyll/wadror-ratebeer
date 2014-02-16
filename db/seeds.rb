@@ -21,8 +21,8 @@ b7 = br3.beers.create name: "Helles", style: "Lager"
 c1 = BeerClub.create name: "Club 1", founded: 2009, city: "Helsinki"
 c2 = BeerClub.create name: "Club 2", founded: 2014, city: "Vantaa"
 
-u1 = User.create username: "User1", password: "User1", password_confirmation: "User1"
-u2 = User.create username: "User2", password: "User2", password_confirmation: "User2"
+u1 = User.create username: "User1", password: "User1", password_confirmation: "User1", admin: true
+u2 = User.create username: "User2", password: "User2", password_confirmation: "User2", admin: false
 
 c1.members << u1
 c1.members << u2
