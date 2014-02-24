@@ -61,6 +61,8 @@ gem 'httparty'
 
 gem "rails-settings-cached", "0.3.1"
 
+gem 'jquery-turbolinks', "2.0.2"
+
 group :test do
   gem 'rspec-rails', '~> 2.14.1'
   gem 'factory_girl_rails', '~> 4.3.0'
