@@ -1,6 +1,4 @@
-<h2>Ratings</h2>
-
-<%= link_to 'Add new rating', new_rating_path %>
+<h1>Ratings</h1>
 
 <p> Number of ratings: <%= @ratings.count %></p>
 
@@ -9,3 +7,5 @@
     <li> <%= link_to r.beer, r.beer %> - <%= r.score %> - <%= link_to r.user.username, r.user %></li>
   <% end %>
 </ul>
+
+<%= link_to 'Add new rating', new_rating_path, class:'btn btn-default btn-sm' %>

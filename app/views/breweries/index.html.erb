@@ -15,8 +15,8 @@
       <tr>
         <td><%= link_to brewery.name, brewery %></td>
         <td><%= brewery.year %></td>
-        <td><%= link_to('Edit', edit_brewery_path(brewery)) if current_user %></td>
-        <td><%= link_to('Delete', brewery, method: :delete, data: { confirm: 'Are you sure?' }) if current_user and current_user.admin%></td>
+        <td><%= link_to('Edit', edit_brewery_path(brewery), class:'btn btn-default btn-xs') if current_user %></td>
+        <td><%= link_to('Delete', brewery, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-default btn-xs') if current_user and current_user.admin%></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to('New Brewery', new_brewery_path) if current_user %>
+<%= link_to('New Brewery', new_brewery_path, class:'btn btn-default btn-sm') if current_user %>
