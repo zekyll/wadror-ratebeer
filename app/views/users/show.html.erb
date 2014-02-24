@@ -30,6 +30,7 @@
       <li>
         <%= link_to m.beer_club, m.beer_club %>
         <% if @user == current_user %>
+          -
           <%= link_to 'delete', m, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
       </li>
