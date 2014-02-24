@@ -12,7 +12,7 @@ class MembershipsController < ApplicationController
     @membership.user = current_user
 
     if @membership.save
-      redirect_to current_user, notice: "Successfully joined #{@membership.beer_club.name}."
+      redirect_to @membership.beer_club, notice: "Welcome to the club, #{@membership.user.username}!"
     else
       render action: 'new'
     end
