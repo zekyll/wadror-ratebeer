@@ -13,7 +13,7 @@
   <% entries.each do |e| %>
     <tr>
       <td><%= link_to e.name, e %></td>
-      <td><%= e.average_rating.round(2) %></td>
+      <td><%= round(e.average_rating) %></td>
     </tr>
   <% end %>
   </tbody>

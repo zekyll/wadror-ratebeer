@@ -8,4 +8,8 @@ module ApplicationHelper
     end
   end
 
+  def round(param)
+    param.round(1)
+  end
+
 end

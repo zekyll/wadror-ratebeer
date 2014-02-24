@@ -2,7 +2,7 @@
 
 <h2>Ratings</h2>
 <% if @user.ratings.any? %>
-  <%= pluralize(@user.ratings.count, 'rating') %>. Average <%= @user.average_rating.round(2) %>.
+  <%= pluralize(@user.ratings.count, 'rating') %>. Average <%= round(@user.average_rating) %>.
   <ul>
     <% @user.ratings.each do |r| %>
       <li>
