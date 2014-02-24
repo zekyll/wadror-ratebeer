@@ -9,6 +9,9 @@ class Brewery < ActiveRecord::Base
             presence: true
   validate :year_cannot_greater_than_current_year
 
+  scope :active, -> { where active:true }
+  scope :retired, -> { where active:[nil,false] }
+
   def print_report
     puts self.name
     puts "established at year #{self.year}"
