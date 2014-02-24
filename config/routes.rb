@@ -22,7 +22,7 @@ Ratebeer::Application.routes.draw do
 
   resources :memberships, only: [:new, :create, :destroy]
 
-  get 'places', to: 'places#index'
+  resources :places, only:[:index, :show]
 
   post 'places', to:'places#search'
 

@@ -1,7 +1,7 @@
 class BeermappingApi
   def self.places_in(city)
     city = city.downcase
-    Rails.cache.fetch(city, expires_in: 600) { fetch_places_in(city) }
+    Rails.cache.fetch(city, expires_in: 3600) { fetch_places_in(city) }
   end
 
   private
@@ -17,7 +17,9 @@ class BeermappingApi
 
     places = [places] if places.is_a?(Hash)
     places.inject([]) do | set, place |
-      set << Place.new(place)
+      p = Place.new(place)
+      Rails.cache.write("place" + p.id.to_s, p, expires_in: 3600)
+      set << p
     end
   end
 
