@@ -1,6 +1,6 @@
 Ratebeer::Application.routes.draw do
 
-  resources :styles, only: [:index, :show]
+  resources :styles
 
   resources :beer_clubs
 
