@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
   validate :password_must_contain_capital_letters
   validate :password_must_contain_digits
 
+  def self.most_active(n)
+    User.all.sort_by{ |u| -u.ratings.length }[0..n-1]
+  end
+
   def favorite_beer
     return nil if ratings.empty?
     ratings.order(score: :desc).limit(1).first.beer

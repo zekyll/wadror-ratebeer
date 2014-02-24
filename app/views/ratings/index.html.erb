@@ -1,9 +1,47 @@
 <h1>Ratings</h1>
 
-<p> Number of ratings: <%= @ratings.count %></p>
+<div class="row">
+  <div class="col-md-4">
+    <%= render 'avglist', entries: @top_beers, title: 'Best beers' %>
+  </div>
+  <div class="col-md-4">
+    <%= render 'avglist', entries: @top_breweries, title: 'Best breweries' %>
+  </div>
+  <div class="col-md-4">
+    <%= render 'avglist', entries: @top_styles, title: 'Best styles' %>
+  </div>
+</div>
+
+<h2>Most active users</h2>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Favorite beer</th>
+    <th>Favorite brewery</th>
+    <th>Favorite style</th>
+    <th>Ratings</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @most_active_users.each do |user| %>
+    <tr>
+      <td><%= link_to user.username, user %></td>
+      <td><%= link_to user.favorite_beer.name, user.favorite_beer %></td>
+      <td><%= link_to user.favorite_brewery.name, user.favorite_brewery %></td>
+      <td><%= link_to user.favorite_style.name, user.favorite_style %></td>
+      <td><%= link_to user.ratings.length %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h2>Recent ratings</h2>
 
 <ul>
-  <% @ratings.each do |r| %>
+  <% @recent_ratings.each do |r| %>
     <li> <%= link_to r.beer, r.beer %> - <%= r.score %> - <%= link_to r.user.username, r.user %></li>
   <% end %>
 </ul>

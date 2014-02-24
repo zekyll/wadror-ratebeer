@@ -1,0 +1,22 @@
+
+<h3><%= title %></h3>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th></th>
+    <th>Average</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% entries.each do |e| %>
+    <tr>
+      <td><%= link_to e.name, e %></td>
+      <td><%= e.average_rating.round(2) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
