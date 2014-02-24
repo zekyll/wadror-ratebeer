@@ -42,4 +42,20 @@ describe "beerlist page" do
     find('table').find('tr:nth-child(3)').should have_content "Lechte Weisse"
     find('table').find('tr:nth-child(4)').should have_content "Nikolai"
   end
+
+  it "sorts by style when clicking style column", js: true do
+    visit beerlist_path
+    click_link "style"
+    find('table').find('tr:nth-child(2)').should have_content "Nikolai"
+    find('table').find('tr:nth-child(3)').should have_content "Fastenbier"
+    find('table').find('tr:nth-child(4)').should have_content "Lechte Weisse"
+  end
+
+  it "sorts by brewery when clicking brewery column", js: true do
+    visit beerlist_path
+    click_link "brewery"
+    find('table').find('tr:nth-child(2)').should have_content "Lechte Weisse"
+    find('table').find('tr:nth-child(3)').should have_content "Nikolai"
+    find('table').find('tr:nth-child(4)').should have_content "Fastenbier"
+  end
 end
