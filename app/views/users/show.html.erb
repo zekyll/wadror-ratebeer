@@ -8,14 +8,16 @@
   <ul>
     <% @user.ratings.each do |r| %>
       <li>
-        <%= r %>
+        <%= link_to r.beer, r.beer %>
+        <%= " - #{r.score}" %>
         <% if @user == current_user %>
+          <%= " - " %>
           <%= link_to 'delete', r, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
       </li>
     <% end %>
   </ul>
-  <p>Favorite style: <%= @user.favorite_style %></p>
+  <p>Favorite style: <%= @user.favorite_style.name %></p>
   <p>Favorite brewery: <%= @user.favorite_brewery.name %></p>
 <% else %>
   <p>No ratings.</p>

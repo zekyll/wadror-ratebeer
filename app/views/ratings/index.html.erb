@@ -6,6 +6,6 @@
 
 <ul>
   <% @ratings.each do |r| %>
-    <li> <%= r %> <%= link_to r.user.username, r.user %></li>
+    <li> <%= link_to r.beer, r.beer %> - <%= r.score %> - <%= link_to r.user.username, r.user %></li>
   <% end %>
 </ul>

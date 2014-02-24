@@ -6,17 +6,23 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+sweizen = Style.create name: "Weizen", description: "Description here..."
+slager = Style.create name: "Lager", description: "Description here..."
+spaleale = Style.create name: "Pale ale", description: "Description here..."
+sipa = Style.create name: "IPA", description: "Description here..."
+sporter = Style.create name: "Porter", description: "Description here..."
+
 br1 = Brewery.create name: "Koff", year: 1897
 br2 = Brewery.create name: "Malmgard", year: 2001
 br3 = Brewery.create name: "Weihenstephaner", year: 1042
 
-b1 = br1.beers.create name: "Iso 3", style: "Lager"
-b2 = br1.beers.create name: "Karhu", style: "Lager"
-b3 = br1.beers.create name: "Tuplahumala", style: "Lager"
-b4 = br2.beers.create name: "Huvila Pale Ale", style: "Pale Ale"
-b5 = br2.beers.create name: "X Porter", style: "Porter"
-b6 = br3.beers.create name: "Hefezeizen", style: "Weizen"
-b7 = br3.beers.create name: "Helles", style: "Lager"
+b1 = br1.beers.create name: "Iso 3", style_id: slager.id
+b2 = br1.beers.create name: "Karhu", style_id: slager.id
+b3 = br1.beers.create name: "Tuplahumala", style_id: slager.id
+b4 = br2.beers.create name: "Huvila Pale Ale", style_id: spaleale.id
+b5 = br2.beers.create name: "X Porter", style_id: sporter.id
+b6 = br3.beers.create name: "Hefezeizen", style_id: sweizen.id
+b7 = br3.beers.create name: "Helles", style_id: slager.id
 
 c1 = BeerClub.create name: "Club 1", founded: 2009, city: "Helsinki"
 c2 = BeerClub.create name: "Club 2", founded: 2014, city: "Vantaa"

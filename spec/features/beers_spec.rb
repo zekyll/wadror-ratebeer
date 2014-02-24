@@ -14,7 +14,7 @@ describe "Beer" do
     visit new_beer_path
 
     fill_in('beer[name]', with:'15')
-    select('Lager', from:'beer[style]')
+    select('Lager', from:'beer[style_id]')
     select('Koff', from:'beer[brewery_id]')
 
     expect{
@@ -28,7 +28,7 @@ describe "Beer" do
     visit new_beer_path
 
     fill_in('beer[name]', with:'')
-    select('Lager', from:'beer[style]')
+    select('Lager', from:'beer[style_id]')
     select('Koff', from:'beer[brewery_id]')
 
     click_button "Create Beer"

@@ -81,10 +81,13 @@ describe User do
     end
 
     it "is the one with highest rating if several rated" do
-      create_beers_with_ratings(2, 3, 4, user, style: "Style1")
-      create_beers_with_ratings(3, 5, user, style: "Style2")
-      create_beers_with_ratings(2, 1, 4, 7, user, style: "Style3")
-      user.favorite_style.should == "Style2"
+      st1 = FactoryGirl.create(:style, name:"Style 1")
+      st2 = FactoryGirl.create(:style, name:"Style 2")
+      st3 = FactoryGirl.create(:style, name:"Style 3")
+      create_beers_with_ratings(2, 3, 4, user, style: st1)
+      create_beers_with_ratings(3, 5, user, style: st2)
+      create_beers_with_ratings(2, 1, 4, 7, user, style: st3)
+      user.favorite_style.should == st2
     end
   end
 
